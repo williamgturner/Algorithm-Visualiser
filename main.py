@@ -56,7 +56,7 @@ class App(customtkinter.CTk):
         self.grid_rowconfigure(1, weight=100)
 
         self.nav_frame = navbarFrame(master=self)
-        self.nav_frame.grid(row=0, column=0, padx=(20,0), pady=(20,0), sticky="ew")
+        self.nav_frame.grid(row=0, column=0, columnspan=2, padx=20, pady=(20,0), sticky="ew")
 
         self.canvas_frame = canvasFrame(master=self)
         self.canvas_frame.grid(row=1, column=0, padx=(20, 0), pady=(5,20), sticky= "nesw")
@@ -76,8 +76,12 @@ class App(customtkinter.CTk):
         self.desc_text.insert(0.0, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis pellentesque lectus. Duis maximus augue a nisi egestas, id vehicula sapien fringilla. Sed porta dui vulputate turpis malesuada, quis venenatis neque maximus. Phasellus efficitur tellus in risus ultrices lobortis. Mauris sed justo hendrerit eros convallis rutrum. Aliquam fringilla tellus a velit efficitur, a volutpat lectus imperdiet. In non tempus nulla. Praesent in massa vel erat sollicitudin fermentum. Nam consectetur nunc leo, et viverra quam maximus quis. Praesent id elit urna. Morbi non lorem blandit, placerat leo et, cursus erat. Suspendisse vestibulum, dolor a cursus sagittis, ipsum mi feugiat justo, sit amet condimentum augue dui vitae urna. Suspendisse condimentum, lectus quis porttitor ornare, lectus eros faucibus leo, vitae semper dui ligula nec leo. Nulla consectetur tellus ac maximus interdum. Nulla facilisi.")
         self.desc_text.grid(row=1, column=0, padx=5, pady=5, sticky="nesw")
 
-        self.binSearchButton = customtkinter.CTkButton(self.nav_frame, text = "Binary Search", command=self.button_callback)
-        self.binSearchButton.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
+        algos = ["Linear Search", "Binary Search", "Quick Sort", "Insertion Sort", "Bubble Sort", "Selection Sort", "Bogo Sort"]
+        self.segmented_button = customtkinter.CTkSegmentedButton(self.nav_frame, values=algos, command=self.button_callback)
+        self.segmented_button.grid(row=0, column=0, padx=5, pady=5, sticky = "ew")
+        self.segmented_button.set("Binary Search")
+        #self.binSearchButton = customtkinter.CTkButton(self.nav_frame, text = "Binary Search", command=self.button_callback)
+        #self.binSearchButton.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
 
         # init seaborn plot
         self.plot_data = sns.load_dataset("penguins")
