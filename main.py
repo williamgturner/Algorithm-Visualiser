@@ -1,4 +1,8 @@
 import customtkinter
+import tkinter as tk
+import seaborn as sns
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 class navbarFrame(customtkinter.CTkFrame):
     def __init__(self, master):
@@ -7,6 +11,29 @@ class navbarFrame(customtkinter.CTkFrame):
 class canvasFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
+    
+    def embed_plot(self, plot):
+            fig = plot.get_figure()
+
+            fig.patch.set_facecolor('none')
+            frame_width = self.winfo_width()
+            frame_height = self.winfo_height()
+            
+            aspect_ratio = frame_width / frame_height
+            fig_width = frame_width * 0.6
+            fig_height = fig_width / aspect_ratio
+            
+            # Adjust the figure size
+            fig.set_size_inches(fig_width / 100, fig_height / 100)  # Convert pixels to inches (100 dpi)
+            
+            # Optionally, use tight_layout to make the plot fit better
+            fig.tight_layout()
+
+            canvas =FigureCanvasTkAgg(fig, master = self)
+            canvas.draw()
+            canvas_widget = canvas.get_tk_widget()
+            canvas.get_tk_widget().pack(padx=5, pady=(50,0), fill=tk.BOTH, expand=True)
+            canvas_widget.config(bg='lightgray')
 
 class descriptionFrame(customtkinter.CTkFrame):
     def __init__(self, master):
@@ -46,6 +73,11 @@ class App(customtkinter.CTk):
 
         self.binSearchButton = customtkinter.CTkButton(self.nav_frame, text = "BinarySearch", command=self.button_callback)
         self.binSearchButton.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
+
+        self.plot_data = sns.load_dataset("penguins")
+        self.plot = sns.boxplot(data=self.plot_data, x="species", y="bill_length_mm")
+        #self.plot.get_figure().set_size_inches(2,1)
+        self.canvas_frame.embed_plot(self.plot)
         
         
         self.focus_force()
