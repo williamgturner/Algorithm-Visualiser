@@ -62,7 +62,6 @@ class App(customtkinter.CTk):
             # Insert the file content into the textbox
             self.desc_text.delete(1.0, customtkinter.END)  # Clear any existing text
             self.desc_text.insert(0.0, file_content)  # Insert the file content at the end
-            print(file_content)
         except Exception as e:
             print(f"Error: {e}")
         

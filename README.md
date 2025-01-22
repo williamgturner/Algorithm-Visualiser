@@ -1,5 +1,5 @@
 # AlgoVis
-An algorithm visualiser written in python using CustomTKinter for graphics.
+An algorithm visualiser written in python; using CustomTKinter for graphics.
 
 ## Algorithms
  - Linear Search
