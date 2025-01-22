@@ -75,7 +75,9 @@ class App(customtkinter.CTk):
         self.binSearchButton.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
 
         self.plot_data = sns.load_dataset("penguins")
-        self.plot = sns.boxplot(data=self.plot_data, x="species", y="bill_length_mm")
+        self.plot = sns.barplot(data=self.plot_data, x="species", y="bill_length_mm")
+        plt.axis('off')
+        #sns.despine()
         #self.plot.get_figure().set_size_inches(2,1)
         self.canvas_frame.embed_plot(self.plot)
         
