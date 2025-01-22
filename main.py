@@ -40,8 +40,8 @@ class App(customtkinter.CTk):
         self.title_label = customtkinter.CTkLabel(self.desc_frame, text="Lorem Ipsum")
         self.title_label.grid(row=0, column=0, padx=5, pady=5, sticky="nesw")
         self.desc_text = customtkinter.CTkTextbox(self.desc_frame, wrap="word")
-        self.desc_text.insert(0.0, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis pellentesque lectus. Duis maximus augue a nisi egestas, id vehicula sapien fringilla. Sed porta dui vulputate turpis malesuada, quis venenatis neque maximus. Phasellus efficitur tellus in risus ultrices lobortis. Mauris sed justo hendrerit eros convallis rutrum. Aliquam fringilla tellus a velit efficitur, a volutpat lectus imperdiet. In non tempus nulla. Praesent in massa vel erat sollicitudin fermentum. Nam consectetur nunc leo, et viverra quam maximus quis. Praesent id elit urna. Morbi non lorem blandit, placerat leo et, cursus erat. Suspendisse vestibulum, dolor a cursus sagittis, ipsum mi feugiat justo, sit amet condimentum augue dui vitae urna. Suspendisse condimentum, lectus quis porttitor ornare, lectus eros faucibus leo, vitae semper dui ligula nec leo. Nulla consectetur tellus ac maximus interdum. Nulla facilisi.")
         self.desc_text.grid(row=1, column=0, padx=5, pady=5, sticky="nesw")
+        self.load_text_from_file("./resources/lorem_ipsum.txt")
         self.startVisButton = customtkinter.CTkButton(self.desc_frame, text="Start Visualisation", command=self.start_vis)
         self.startVisButton.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
 
@@ -52,6 +52,20 @@ class App(customtkinter.CTk):
         
         self.focus_force() # bring window into focus on app open
 
+
+    def load_text_from_file(self, file_path):
+        try:
+            # Open the file and read its content
+            with open(file_path, 'r') as file:
+                file_content = file.read()
+            
+            # Insert the file content into the textbox
+            self.desc_text.delete(1.0, customtkinter.END)  # Clear any existing text
+            self.desc_text.insert(0.0, file_content)  # Insert the file content at the end
+            print(file_content)
+        except Exception as e:
+            print(f"Error: {e}")
+        
     def start_vis(self):
         print("Visualisation Started")
     def button_callback(self):
