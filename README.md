@@ -1,4 +1,4 @@
-# AlgoVis-2.0
+# AlgoVis
 An algorithm visualiser written in python using CustomTKinter for graphics.
 
 ## Algorithms
@@ -8,5 +8,5 @@ An algorithm visualiser written in python using CustomTKinter for graphics.
  - Insertion Sort
  - Bubble Sort
  - Bogo Sort
- 
+
 ## Screenshot
