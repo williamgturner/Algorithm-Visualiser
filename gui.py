@@ -1,7 +1,6 @@
 import customtkinter
 import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-
 class navbarFrame(customtkinter.CTkFrame):
     """Frame that holds buttons to select algorithm"""
     def __init__(self, master):
