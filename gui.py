@@ -45,6 +45,7 @@ class descriptionFrame(customtkinter.CTkFrame):
     """Frame that holds the description text for given algorithm"""
     def __init__(self, master):
         super().__init__(master)
+        master.grid(row=0, column=0, padx=0,pady=0,sticky="nesw")
         # init description frame, text and button
         self.grid_rowconfigure(0, weight=0)
         self.grid_rowconfigure(1, weight=1)
@@ -55,8 +56,10 @@ class descriptionFrame(customtkinter.CTkFrame):
         self.title_label.grid(row=0, column=0, padx=5, pady=5, sticky="nesw")
         self.desc_text = customtkinter.CTkTextbox(self, wrap="word")
         self.desc_text.grid(row=1, column=0, padx=5, pady=5, sticky="nesw")
-        #self.load_text_from_file("./resources/lorem_ipsum.txt")
-        self.startVisButton = customtkinter.CTkButton(self, text="Start Visualisation")
+        text = master.master.load_text_from_file("./resources/lorem_ipsum.txt")
+        self.desc_text.delete(1.0, customtkinter.END)
+        self.desc_text.insert(0.0, text)
+        self.startVisButton = customtkinter.CTkButton(self, text="Start Visualisation", command=master.master.start_vis)
         self.startVisButton.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
 
 class gui(customtkinter.CTkFrame):

@@ -15,8 +15,6 @@ class App(customtkinter.CTk):
         plt.axis('off')
 
         self.gui = gui.gui(master=self)
-        self.gui.grid(row=0, column=0, padx=0,pady=0,sticky="nesw")
-
         # init seaborn plot
         self.plot_data = sns.load_dataset("penguins")
         self.plot = sns.barplot(data=self.plot_data, x="species", y="bill_length_mm")
@@ -29,8 +27,7 @@ class App(customtkinter.CTk):
             with open(file_path, 'r') as file:
                 file_content = file.read()
             
-            self.desc_text.delete(1.0, customtkinter.END)
-            self.desc_text.insert(0.0, file_content)
+            return file_content
         except Exception as e:
             print(f"Error: {e}")
         
