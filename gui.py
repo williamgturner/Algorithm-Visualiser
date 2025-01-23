@@ -5,6 +5,11 @@ class navbarFrame(customtkinter.CTkFrame):
     """Frame that holds buttons to select algorithm"""
     def __init__(self, master):
         super().__init__(master)
+        # init navbar and nav buttons
+        algos = ["Linear Search", "Binary Search", "Quick Sort", "Insertion Sort", "Bubble Sort", "Selection Sort", "Bogo Sort"]
+        self.segmented_button = customtkinter.CTkSegmentedButton(self, values=algos)
+        self.segmented_button.grid(row=0, column=0, padx=5, pady=5, sticky = "ew")
+        self.segmented_button.set("Binary Search")
 
 class canvasFrame(customtkinter.CTkFrame):
     """Frame that holds the matplotlib figure"""
@@ -17,6 +22,7 @@ class canvasFrame(customtkinter.CTkFrame):
         Creates a regular tk canvas which then holds the matplotlib
         figure. The figure is adjusted to fit within the viewport."""
         fig = plot.get_figure()
+        fig.tight_layout()
 
         fig.patch.set_facecolor('none')
         frame_width = self.winfo_width()
@@ -28,7 +34,6 @@ class canvasFrame(customtkinter.CTkFrame):
         
         fig.set_size_inches(fig_width / 100, fig_height / 100)  # Convert pixels to inches (100 dpi)
         
-        fig.tight_layout()
 
         canvas =FigureCanvasTkAgg(fig, master = self)
         canvas.draw()
@@ -40,3 +45,31 @@ class descriptionFrame(customtkinter.CTkFrame):
     """Frame that holds the description text for given algorithm"""
     def __init__(self, master):
         super().__init__(master)
+        # init description frame, text and button
+        self.grid_rowconfigure(0, weight=0)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(2, weight=0)
+        self.grid_columnconfigure(0, weight=1)
+
+        self.title_label = customtkinter.CTkLabel(self, text="Lorem Ipsum")
+        self.title_label.grid(row=0, column=0, padx=5, pady=5, sticky="nesw")
+        self.desc_text = customtkinter.CTkTextbox(self, wrap="word")
+        self.desc_text.grid(row=1, column=0, padx=5, pady=5, sticky="nesw")
+        #self.load_text_from_file("./resources/lorem_ipsum.txt")
+        self.startVisButton = customtkinter.CTkButton(self, text="Start Visualisation")
+        self.startVisButton.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
+
+class gui(customtkinter.CTkFrame):
+    def __init__(self, master):
+        super().__init__(master)
+        self.grid_columnconfigure(0, weight=1)  # Allow column 0 to expand and take all available width
+        self.grid_rowconfigure(0, weight=0)    # Navbar doesn't need to take too much height, so set weight 0
+        self.grid_rowconfigure(1, weight=1)    # Canvas frame should expand vertically to fill the rest of the space
+        self.navbar = navbarFrame(master=self)
+        self.navbar.grid(row=0, column=0, sticky="ew")
+        self.canvas = canvasFrame(master=self)
+        self.canvas.grid(row=1, column=0, padx=(20, 0), pady=(5,20), sticky= "nesw")
+
+        self.description = descriptionFrame(master=self)
+        self.description.grid(row=1, column=1, padx=(5,20), pady=(5,20), sticky= "nsew")
+        # self.navbar.grid(row=0, column=0, columnspan=2, padx=20, pady=(20, 0), sticky="ew")
