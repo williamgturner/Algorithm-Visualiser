@@ -3,6 +3,8 @@ import tkinter as tk
 import seaborn as sns
 import matplotlib.pyplot as plt
 import gui
+import time
+import threading
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -30,9 +32,14 @@ class App(customtkinter.CTk):
             return file_content
         except Exception as e:
             print(f"Error: {e}")
-        
+    
+
     def start_vis(self):
+        print("Sleep Over")
+    
+    def button_click(self):
         print("Visualisation Started")
+        self.after(5000, self.start_vis)
     
     def button_callback(self):
         print("button pressed")
