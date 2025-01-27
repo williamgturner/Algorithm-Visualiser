@@ -43,6 +43,8 @@ class App(customtkinter.CTk):
             vis.step()
             # run in background so GUI remains responsive
             self.after(500, self.start_vis, vis)
+        else:
+            self.gui.description.set_button_enable()
     
     def button_click(self):
         self.gui.description.set_button_enable()
