@@ -84,7 +84,7 @@ class descriptionFrame(customtkinter.CTkFrame):
     """Frame that holds the description text for given algorithm"""
     def __init__(self, master):
         super().__init__(master)
-         # set pos
+        # set pos
         self.grid_rowconfigure(0, weight=0)
         self.grid_rowconfigure(1, weight=1)
         self.grid_rowconfigure(2, weight=0)
@@ -101,12 +101,13 @@ class descriptionFrame(customtkinter.CTkFrame):
         text = master.master.load_text_from_file("./resources/lorem_ipsum.txt")
         self.desc_text.delete(1.0, customtkinter.END)
         self.desc_text.insert(0.0, text)
+        self.desc_text.configure(state="disabled")
         self.startVisButton = customtkinter.CTkButton(self,
             text="Start Visualisation", command=master.master.vis_button_click)
         self.startVisButton.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
     
     def set_button_enable(self):
-        """Disables 'start visualisation' button."""
+        """Toggles 'start visualisation' button."""
         if self.button_enabled == "normal":
             self.startVisButton.configure(state="disabled")
         else:
@@ -114,6 +115,7 @@ class descriptionFrame(customtkinter.CTkFrame):
         self.button_enabled = not self.button_enabled
     
     def update_text(self):
+        """Updates description text to current algorithm"""
         self.title_label.configure(text = self.master.navbar.segmented_button.get())
 
 
@@ -123,7 +125,7 @@ class gui(customtkinter.CTkFrame):
         super().__init__(master)
         self.grid(row=0, column=0, padx=0,pady=0,sticky="nesw")
         self.grid_columnconfigure(0, weight=1) 
-        self.grid_rowconfigure(1, weight=1)    # Canvas frame should expand vertically to fill the rest of the space
+        self.grid_rowconfigure(1, weight=1)
         self.navbar = navbarFrame(master=self)
         self.canvas = canvasFrame(master=self)
         self.description = descriptionFrame(master=self)
