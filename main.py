@@ -18,9 +18,6 @@ class App(customtkinter.CTk):
 
         self.gui = gui.gui(master=self)
         # init seaborn plot
-        self.plot_data = sns.load_dataset("penguins")
-        self.plot = sns.barplot(data=self.plot_data, x="species", y="bill_length_mm")
-        self.gui.canvas.embed_plot(self.plot)
         self.focus_force() # bring window into focus on app open
 
 
@@ -32,11 +29,12 @@ class App(customtkinter.CTk):
             return file_content
         except Exception as e:
             print(f"Error: {e}")
-    
 
     def start_vis(self, search):
         if (not search.complete):
             search.step()
+            self.gui.canvas.update_plot(search)
+            
             self.after(500, self.start_vis, search)
         else:
             print(search.index)

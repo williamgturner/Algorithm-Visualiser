@@ -1,5 +1,6 @@
 import customtkinter
 import tkinter as tk
+import seaborn as sns
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 class navbarFrame(customtkinter.CTkFrame):
     """Frame that holds buttons to select algorithm"""
@@ -41,6 +42,11 @@ class canvasFrame(customtkinter.CTkFrame):
         canvas_widget = canvas.get_tk_widget()
         canvas.get_tk_widget().pack(padx=5, pady=(50,0), fill=tk.BOTH, expand=True)
         canvas_widget.config(bg='lightgray')
+    
+    def update_plot(self, search):
+        self.plot_data = search.array
+        self.plot = sns.barplot(x=range(len(self.plot_data)), y=self.plot_data)
+        self.embed_plot(self.plot)
 
 class descriptionFrame(customtkinter.CTkFrame):
     """Frame that holds the description text for given algorithm"""
