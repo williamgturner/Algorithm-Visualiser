@@ -118,7 +118,7 @@ class descriptionFrame(customtkinter.CTkFrame):
             text="Start Visualisation", command=master.master.vis_button_click)
         self.startVisButton.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
     
-    def set_button_enable(self):
+    def toggle_button_enable(self):
         """Toggles 'start visualisation' button."""
         if self.startVisButton.cget("state") == "normal":
             self.startVisButton.configure(state="disabled")

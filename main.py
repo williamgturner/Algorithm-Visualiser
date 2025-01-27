@@ -51,12 +51,12 @@ class App(customtkinter.CTk):
 
             self.after(delay, self.start_vis, vis)
         else:
-            self.gui.description.set_button_enable()
+            self.gui.description.toggle_button_enable()
     
     def vis_button_click(self):
-        if self.vis.complete:
-            self.vis = type(self.vis)(time.time())
-        self.gui.description.set_button_enable()
+        self.vis = type(self.vis)(time.time())
+        self.gui.canvas.init_plot(self.vis)
+        self.gui.description.toggle_button_enable()
         self.start_vis(self.vis)
     
     def navbar_button_command(self, state):
