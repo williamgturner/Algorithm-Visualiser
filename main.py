@@ -30,8 +30,8 @@ class App(customtkinter.CTk):
             print(f"Error: {e}")
 
     def start_vis(self, vis):
+        self.gui.canvas.update_plot(vis)
         if (not vis.complete):
-            self.gui.canvas.update_plot(vis)
             vis.step()
             self.after(500, self.start_vis, vis)
     

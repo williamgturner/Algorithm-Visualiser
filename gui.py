@@ -51,7 +51,10 @@ class canvasFrame(customtkinter.CTkFrame):
     
     def update_plot(self, search):
         colours = ["skyblue"] * len(search.array)
-        colours[search.index] = "red"
+        if search.complete:
+            colours[search.index] = "green"
+        else:
+            colours[search.index] = "red"
 
         self.plot.clear()
         self.plot.bar(range(len(search.array)), search.array, color= colours)
