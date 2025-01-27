@@ -47,8 +47,8 @@ class App(customtkinter.CTk):
             self.gui.description.set_button_enable()
     
     def button_click(self):
-        self.gui.description.set_button_enable()
         vis = searches.linear_search(time.time())
+        self.gui.description.set_button_enable()
         self.start_vis(vis)
     
     def button_callback(self):
