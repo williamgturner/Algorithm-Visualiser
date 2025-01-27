@@ -39,24 +39,30 @@ class canvasFrame(customtkinter.CTkFrame):
         self.plot = figure.add_subplot(1, 1, 1)
 
         # set plot aesthetics
-        self.plot.patch.set_facecolor('none')
-        self.plot.spines['bottom'].set_color('white')
-        self.plot.spines['top'].set_color('none') 
-        self.plot.spines['right'].set_color('none')
-        self.plot.spines['left'].set_color('white')
-        self.plot.yaxis.set_major_locator(MultipleLocator(2))  # Step size 2
-        self.plot.set_ylim(0, 50)  # Set y-axis limits
-        self.plot.grid(True, axis='y', linestyle='--', color='gray', alpha=0.5)
-        self.plot.tick_params(axis='y', labelcolor='white')
+        self.style_plot()
 
         self.canvas = FigureCanvasTkAgg(figure, self)
         self.canvas.get_tk_widget().grid(row=0, column = 0,
             padx=5, pady=5, sticky="nesw")
         self.canvas.get_tk_widget().config(bg=self['bg'])
 
+
+    def style_plot(self):
+        self.plot.patch.set_facecolor('none')
+        self.plot.spines['bottom'].set_color('white')
+        self.plot.spines['top'].set_color('none') 
+        self.plot.spines['right'].set_color('none')
+        self.plot.spines['left'].set_color('white')
+        self.plot.yaxis.set_major_locator(MultipleLocator(10))  # Step size 2
+        self.plot.set_ylim(0, 50)  # Set y-axis limits
+        self.plot.grid(True, axis='y', linestyle='--', color='gray', alpha=0.5)
+        self.plot.tick_params(axis='y', labelcolor='white')
         self.plot.set_xticklabels([])
-    
+
     def init_plot(self, search):
+        self.plot.clear()
+        self.style_plot()
+        self.plot.set_title(f"Target Value: {search.search_val}", color = "white")
         colours = ["skyblue"] * len(search.array)
         self.plot.bar(range(len(search.array)), search.array, color= colours)
     
@@ -73,15 +79,10 @@ class canvasFrame(customtkinter.CTkFrame):
         else:
             colours[search.index] = "red"
         
-        for bar in self.plot.patches:
-            bar.remove()
-        
-        self.plot.bar(range(len(search.array)), search.array, color=colours)
-        
         for i, bar in enumerate(self.plot.patches):
-            bar.set_color(colours[i])  
+            bar.set_color(colours[i])
         
-        self.canvas.draw()
+        self.canvas.draw_idle()
 
 class descriptionFrame(customtkinter.CTkFrame):
     """Frame that holds the description text for given algorithm"""
