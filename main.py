@@ -44,7 +44,12 @@ class App(customtkinter.CTk):
         if (not vis.complete):
             vis.step()
             # run in background so GUI remains responsive
-            self.after(2000, self.start_vis, vis)
+            if type(self.vis) == searches.linear_search:
+                delay = 100
+            else:
+                delay = 1500
+
+            self.after(delay, self.start_vis, vis)
         else:
             self.gui.description.set_button_enable()
     
