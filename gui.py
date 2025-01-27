@@ -62,6 +62,7 @@ class canvasFrame(customtkinter.CTkFrame):
                 a search object that contains an array and index"""
         
         colours = ["skyblue"] * len(search.array)
+        colours[search.array.index(search.search_val)] = "gold"
         if search.complete:
             colours[search.index] = "green"
         else:

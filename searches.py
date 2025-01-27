@@ -1,7 +1,7 @@
 
 import random
 
-class search():
+class searchAlgorithm():
     def __init__(self, seed):
         self.index= 0
         self.array = list(range(1, 21))
@@ -9,7 +9,7 @@ class search():
         random.seed(seed)
         random.shuffle(self.array)
         self.search_val = random.choice(self.array)
-class linear_search(search):
+class linear_search(searchAlgorithm):
     def __init__(self, seed):
         super().__init__(seed)
     
