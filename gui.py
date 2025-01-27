@@ -92,8 +92,6 @@ class descriptionFrame(customtkinter.CTkFrame):
         self.grid_columnconfigure(0, weight=1)
         self.grid(row=1, column=1, padx=(5,20), pady=(5,20), sticky= "nsew")
 
-        self.button_enabled = "normal"
-
         # init description frame, text and button
         self.title_label = customtkinter.CTkLabel(self, text=master.navbar.segmented_button.get())
         self.title_label.grid(row=0, column=0, padx=5, pady=5, sticky="nesw")
@@ -109,11 +107,10 @@ class descriptionFrame(customtkinter.CTkFrame):
     
     def set_button_enable(self):
         """Toggles 'start visualisation' button."""
-        if self.button_enabled == "normal":
+        if self.startVisButton.cget("state") == "normal":
             self.startVisButton.configure(state="disabled")
         else:
             self.startVisButton.configure(state="normal")
-        self.button_enabled = not self.button_enabled
     
     def update_text(self):
         """Updates description text to current algorithm"""
