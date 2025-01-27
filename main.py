@@ -12,7 +12,7 @@ class App(customtkinter.CTk):
         self.geometry("800x600")
         self.grid_columnconfigure(0, weight=8)
         self.grid_rowconfigure(0, weight=1)
-        self._set_appearance_mode("dark")
+        customtkinter.set_appearance_mode("dark")
 
         self.gui = gui.gui(master=self)
         self.focus_force() # bring window into focus on app open
@@ -42,12 +42,12 @@ class App(customtkinter.CTk):
         if (not vis.complete):
             vis.step()
             # run in background so GUI remains responsive
-            self.after(40, self.start_vis, vis)
+            self.after(2000, self.start_vis, vis)
         else:
             self.gui.description.set_button_enable()
     
     def vis_button_click(self):
-        vis = searches.linear_search(time.time())
+        vis = searches.binary_search(time.time())
         self.gui.description.set_button_enable()
         self.gui.canvas.init_plot(vis)
         self.start_vis(vis)
