@@ -42,13 +42,14 @@ class App(customtkinter.CTk):
         if (not vis.complete):
             vis.step()
             # run in background so GUI remains responsive
-            self.after(500, self.start_vis, vis)
+            self.after(40, self.start_vis, vis)
         else:
             self.gui.description.set_button_enable()
     
     def vis_button_click(self):
         vis = searches.linear_search(time.time())
         self.gui.description.set_button_enable()
+        self.gui.canvas.init_plot(vis)
         self.start_vis(vis)
     
     def navbar_button_command(self, state):

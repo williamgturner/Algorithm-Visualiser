@@ -4,7 +4,7 @@ import random
 class searchAlgorithm():
     def __init__(self, seed):
         self.index= 0
-        self.array = list(range(1, 21))
+        self.array = list(range(1, 51))
         self.complete = False
         random.seed(seed)
         random.shuffle(self.array)

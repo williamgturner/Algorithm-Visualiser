@@ -1,5 +1,7 @@
 import customtkinter
 import tkinter as tk
+import matplotlib
+matplotlib.use('TKAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.ticker import MultipleLocator
@@ -39,14 +41,13 @@ class canvasFrame(customtkinter.CTkFrame):
         # set plot aesthetics
         self.plot.patch.set_facecolor('none')
         self.plot.spines['bottom'].set_color('white')
-        self.plot.spines['top'].set_color('white') 
-        self.plot.spines['right'].set_color('white')
+        self.plot.spines['top'].set_color('none') 
+        self.plot.spines['right'].set_color('none')
         self.plot.spines['left'].set_color('white')
         self.plot.yaxis.set_major_locator(MultipleLocator(2))  # Step size 2
-        self.plot.set_ylim(0, 20)  # Set y-axis limits
+        self.plot.set_ylim(0, 50)  # Set y-axis limits
         self.plot.grid(True, axis='y', linestyle='--', color='gray', alpha=0.5)
         self.plot.tick_params(axis='y', labelcolor='white')
-
 
         self.canvas = FigureCanvasTkAgg(figure, self)
         self.canvas.get_tk_widget().grid(row=0, column = 0,
@@ -54,6 +55,10 @@ class canvasFrame(customtkinter.CTkFrame):
         self.canvas.get_tk_widget().config(bg=self['bg'])
 
         self.plot.set_xticklabels([])
+    
+    def init_plot(self, search):
+        colours = ["skyblue"] * len(search.array)
+        self.plot.bar(range(len(search.array)), search.array, color= colours)
     
     def update_plot(self, search):
         """Update plot graphics.
@@ -67,18 +72,15 @@ class canvasFrame(customtkinter.CTkFrame):
             colours[search.index] = "green"
         else:
             colours[search.index] = "red"
-
-        self.plot.clear()
-        self.plot.bar(range(len(search.array)), search.array, color= colours)
-        # set plot aesthetics
-        self.plot.set_title(f"Target: {search.search_val}", color = "white")
-        self.plot.set_xticklabels([])
-        self.plot.set_xlabel(f"Current Index: {search.index}", color = "white")
-        self.plot.patch.set_facecolor('none')
-        self.plot.yaxis.set_major_locator(MultipleLocator(2))  # Step size 2
-        self.plot.set_ylim(0, 20)  # Set y-axis limits
-        self.plot.grid(True, axis='y', linestyle='--', color='gray', alpha=0.5)
-        self.plot.tick_params(axis='y', labelcolor='white')
+        
+        for bar in self.plot.patches:
+            bar.remove()
+        
+        self.plot.bar(range(len(search.array)), search.array, color=colours)
+        
+        for i, bar in enumerate(self.plot.patches):
+            bar.set_color(colours[i])  
+        
         self.canvas.draw()
 
 class descriptionFrame(customtkinter.CTkFrame):
