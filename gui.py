@@ -13,10 +13,11 @@ class navbarFrame(customtkinter.CTkFrame):
         # init navbar and nav buttons
         algos = ["Linear Search", "Binary Search", "Quick Sort",
             "Insertion Sort", "Bubble Sort", "Selection Sort", "Bogo Sort"]
-        self.segmented_button = customtkinter.CTkSegmentedButton(self, values=algos)
+        self.segmented_button = customtkinter.CTkSegmentedButton(self, values=algos,
+            command=master.master.navbar_button_command)
         self.segmented_button.grid(row=0, column=0, padx=5,
             pady=5, columnspan=2, sticky = "ew")
-        self.segmented_button.set("Binary Search")
+        self.segmented_button.set("Linear Search")
 
 class canvasFrame(customtkinter.CTkFrame):
     """Frame that holds the matplotlib figure"""
@@ -93,7 +94,7 @@ class descriptionFrame(customtkinter.CTkFrame):
         self.button_enabled = "normal"
 
         # init description frame, text and button
-        self.title_label = customtkinter.CTkLabel(self, text="Lorem Ipsum")
+        self.title_label = customtkinter.CTkLabel(self, text=master.navbar.segmented_button.get())
         self.title_label.grid(row=0, column=0, padx=5, pady=5, sticky="nesw")
         self.desc_text = customtkinter.CTkTextbox(self, wrap="word")
         self.desc_text.grid(row=1, column=0, padx=5, pady=5, sticky="nesw")
@@ -101,7 +102,7 @@ class descriptionFrame(customtkinter.CTkFrame):
         self.desc_text.delete(1.0, customtkinter.END)
         self.desc_text.insert(0.0, text)
         self.startVisButton = customtkinter.CTkButton(self,
-            text="Start Visualisation", command=master.master.button_click)
+            text="Start Visualisation", command=master.master.vis_button_click)
         self.startVisButton.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
     
     def set_button_enable(self):
@@ -111,6 +112,9 @@ class descriptionFrame(customtkinter.CTkFrame):
         else:
             self.startVisButton.configure(state="normal")
         self.button_enabled = not self.button_enabled
+    
+    def update_text(self):
+        self.title_label.configure(text = self.master.navbar.segmented_button.get())
 
 
 class gui(customtkinter.CTkFrame):

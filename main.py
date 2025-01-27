@@ -46,13 +46,13 @@ class App(customtkinter.CTk):
         else:
             self.gui.description.set_button_enable()
     
-    def button_click(self):
+    def vis_button_click(self):
         vis = searches.linear_search(time.time())
         self.gui.description.set_button_enable()
         self.start_vis(vis)
     
-    def button_callback(self):
-        print("button pressed")
+    def navbar_button_command(self, state):
+        self.gui.description.update_text()
 
 app = App()
 app.mainloop()
