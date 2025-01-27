@@ -38,7 +38,7 @@ class App(customtkinter.CTk):
     
     def button_click(self):
         print("Visualisation Started")
-        search = searches.linear_search()
+        search = searches.linear_search(time.time())
         self.start_vis(search)
     
     def button_callback(self):

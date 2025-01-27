@@ -2,11 +2,11 @@
 import random
 
 class linear_search():
-    def __init__(self):
+    def __init__(self, seed):
         self.index= 0
         self.array = list(range(1, 21))
         self.complete = False
-        random.seed(1)
+        random.seed(seed)
         random.shuffle(self.array)
         self.search_val = random.choice(self.array)
     
@@ -18,5 +18,3 @@ class linear_search():
             self.index += 1
             self.complete = False
             return False
-
-
