@@ -1,4 +1,5 @@
 import customtkinter
+import tkinter as tk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.ticker import MultipleLocator
@@ -10,9 +11,11 @@ class navbarFrame(customtkinter.CTkFrame):
         self.grid_columnconfigure(0, weight=1)
         self.grid(row=0, column=0, padx=20,pady=(20,0),columnspan=2,sticky="ew")
         # init navbar and nav buttons
-        algos = ["Linear Search", "Binary Search", "Quick Sort", "Insertion Sort", "Bubble Sort", "Selection Sort", "Bogo Sort"]
+        algos = ["Linear Search", "Binary Search", "Quick Sort",
+            "Insertion Sort", "Bubble Sort", "Selection Sort", "Bogo Sort"]
         self.segmented_button = customtkinter.CTkSegmentedButton(self, values=algos)
-        self.segmented_button.grid(row=0, column=0, padx=5, pady=5, columnspan=2,sticky = "ew")
+        self.segmented_button.grid(row=0, column=0, padx=5,
+            pady=5, columnspan=2, sticky = "ew")
         self.segmented_button.set("Binary Search")
 
 class canvasFrame(customtkinter.CTkFrame):
@@ -31,8 +34,9 @@ class canvasFrame(customtkinter.CTkFrame):
         figure.patch.set_facecolor('none')
 
         self.plot = figure.add_subplot(1, 1, 1)
-        self.plot.patch.set_facecolor('none')
 
+        # set plot aesthetics
+        self.plot.patch.set_facecolor('none')
         self.plot.spines['bottom'].set_color('white')
         self.plot.spines['top'].set_color('white') 
         self.plot.spines['right'].set_color('white')
@@ -44,12 +48,18 @@ class canvasFrame(customtkinter.CTkFrame):
 
 
         self.canvas = FigureCanvasTkAgg(figure, self)
-        self.canvas.get_tk_widget().grid(row=0, column = 0, padx=5, pady=5, sticky="nesw")
+        self.canvas.get_tk_widget().grid(row=0, column = 0,
+            padx=5, pady=5, sticky="nesw")
         self.canvas.get_tk_widget().config(bg=self['bg'])
 
         self.plot.set_xticklabels([])
     
     def update_plot(self, search):
+        """Update plot graphics.
+        args:
+            search:
+                a search object that contains an array and index"""
+        
         colours = ["skyblue"] * len(search.array)
         if search.complete:
             colours[search.index] = "green"
@@ -58,6 +68,7 @@ class canvasFrame(customtkinter.CTkFrame):
 
         self.plot.clear()
         self.plot.bar(range(len(search.array)), search.array, color= colours)
+        # set plot aesthetics
         self.plot.set_title(f"Target: {search.search_val}", color = "white")
         self.plot.set_xticklabels([])
         self.plot.set_xlabel(f"Current Index: {search.index}", color = "white")
@@ -79,6 +90,8 @@ class descriptionFrame(customtkinter.CTkFrame):
         self.grid_columnconfigure(0, weight=1)
         self.grid(row=1, column=1, padx=(5,20), pady=(5,20), sticky= "nsew")
 
+        self.button_enabled = "normal"
+
         # init description frame, text and button
         self.title_label = customtkinter.CTkLabel(self, text="Lorem Ipsum")
         self.title_label.grid(row=0, column=0, padx=5, pady=5, sticky="nesw")
@@ -87,10 +100,21 @@ class descriptionFrame(customtkinter.CTkFrame):
         text = master.master.load_text_from_file("./resources/lorem_ipsum.txt")
         self.desc_text.delete(1.0, customtkinter.END)
         self.desc_text.insert(0.0, text)
-        self.startVisButton = customtkinter.CTkButton(self, text="Start Visualisation", command=master.master.button_click)
+        self.startVisButton = customtkinter.CTkButton(self,
+            text="Start Visualisation", command=master.master.button_click)
         self.startVisButton.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
+    
+    def set_button_enable(self):
+        """Disables 'start visualisation' button."""
+        if self.button_enabled == "normal":
+            self.startVisButton.configure(state="disabled")
+        else:
+            self.startVisButton.configure(state="normal")
+        self.button_enabled = not self.button_enabled
+
 
 class gui(customtkinter.CTkFrame):
+    """Frame that contains all GUI elements"""
     def __init__(self, master):
         super().__init__(master)
         self.grid(row=0, column=0, padx=0,pady=0,sticky="nesw")
