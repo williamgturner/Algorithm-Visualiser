@@ -4,10 +4,8 @@ import random
 class linear_search():
     def __init__(self):
         self.index= 0
-        self.array = []
+        self.array = list(range(1, 21))
         self.complete = False
-        for i in range(20):
-            self.array.append(i)
         random.seed(1)
         random.shuffle(self.array)
         self.search_val = random.choice(self.array)

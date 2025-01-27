@@ -1,5 +1,5 @@
 # AlgoVis
-An algorithm visualiser written in python; using CustomTKinter for graphics.
+An algorithm visualiser written in python; using CustomTKinter for graphics and seaborn/matplotlib for graphs.
 
 ## Algorithms
  - Linear Search
@@ -9,4 +9,4 @@ An algorithm visualiser written in python; using CustomTKinter for graphics.
  - Bubble Sort
  - Bogo Sort
 
-## Screenshot
+## Screenshots

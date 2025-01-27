@@ -1,5 +1,4 @@
 import customtkinter
-import seaborn as sns
 import matplotlib.pyplot as plt
 import gui
 import searches
@@ -17,7 +16,6 @@ class App(customtkinter.CTk):
         plt.axis('off')
 
         self.gui = gui.gui(master=self)
-        # init seaborn plot
         self.focus_force() # bring window into focus on app open
 
 
@@ -34,7 +32,6 @@ class App(customtkinter.CTk):
         if (not search.complete):
             search.step()
             self.gui.canvas.update_plot(search)
-            
             self.after(500, self.start_vis, search)
         else:
             print(search.index)
