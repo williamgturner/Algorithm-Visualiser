@@ -15,6 +15,8 @@ class App(customtkinter.CTk):
         customtkinter.set_appearance_mode("dark")
 
         self.gui = gui.gui(master=self)
+        self.vis = searches.linear_search(time.time())
+        self.gui.canvas.init_plot(self.vis)
         self.focus_force() # bring window into focus on app open
 
     def load_text_from_file(self, file_path):
@@ -47,13 +49,20 @@ class App(customtkinter.CTk):
             self.gui.description.set_button_enable()
     
     def vis_button_click(self):
-        vis = searches.binary_search(time.time())
+        if self.vis.complete:
+            self.vis = type(self.vis)(time.time())
         self.gui.description.set_button_enable()
-        self.gui.canvas.init_plot(vis)
-        self.start_vis(vis)
+        self.start_vis(self.vis)
     
     def navbar_button_command(self, state):
+        match state:
+            case "Linear Search":
+                self.vis = searches.linear_search(time.time())
+            case "Binary Search":
+                self.vis = searches.binary_search(time.time())
+        self.gui.canvas.init_plot(self.vis)
         self.gui.description.update_text()
+        self.gui.canvas.update_plot(self.vis)
 
 app = App()
 app.mainloop()
