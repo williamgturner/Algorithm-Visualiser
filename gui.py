@@ -1,8 +1,7 @@
 import customtkinter
-import tkinter as tk
-import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.ticker import MultipleLocator
 class navbarFrame(customtkinter.CTkFrame):
     """Frame that holds buttons to select algorithm"""
     def __init__(self, master):
@@ -29,20 +28,41 @@ class canvasFrame(customtkinter.CTkFrame):
         canvas_width = self.winfo_width()
 
         figure = Figure(figsize=(canvas_width, canvas_height))
+        figure.patch.set_facecolor('none')
+
         self.plot = figure.add_subplot(1, 1, 1)
+        self.plot.patch.set_facecolor('none')
+
+        self.plot.spines['bottom'].set_color('white')
+        self.plot.spines['top'].set_color('white') 
+        self.plot.spines['right'].set_color('white')
+        self.plot.spines['left'].set_color('white')
+        self.plot.yaxis.set_major_locator(MultipleLocator(2))  # Step size 2
+        self.plot.set_ylim(0, 20)  # Set y-axis limits
+        self.plot.grid(True, axis='y', linestyle='--', color='gray', alpha=0.5)
+        self.plot.tick_params(axis='y', labelcolor='white')
+
+
         self.canvas = FigureCanvasTkAgg(figure, self)
         self.canvas.get_tk_widget().grid(row=0, column = 0, padx=5, pady=5, sticky="nesw")
+        self.canvas.get_tk_widget().config(bg=self['bg'])
 
         self.plot.set_xticklabels([])
     
     def update_plot(self, search):
         colours = ["skyblue"] * len(search.array)
         colours[search.index] = "red"
+
         self.plot.clear()
         self.plot.bar(range(len(search.array)), search.array, color= colours)
-        self.plot.set_title(f"Target: {search.search_val}")
+        self.plot.set_title(f"Target: {search.search_val}", color = "white")
         self.plot.set_xticklabels([])
-        self.plot.set_xlabel(f"Current Index: {search.index}")
+        self.plot.set_xlabel(f"Current Index: {search.index}", color = "white")
+        self.plot.patch.set_facecolor('none')
+        self.plot.yaxis.set_major_locator(MultipleLocator(2))  # Step size 2
+        self.plot.set_ylim(0, 20)  # Set y-axis limits
+        self.plot.grid(True, axis='y', linestyle='--', color='gray', alpha=0.5)
+        self.plot.tick_params(axis='y', labelcolor='white')
         self.canvas.draw()
 
 class descriptionFrame(customtkinter.CTkFrame):

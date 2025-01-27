@@ -13,6 +13,7 @@ class App(customtkinter.CTk):
         self.geometry("800x600")
         self.grid_columnconfigure(0, weight=8)
         self.grid_rowconfigure(0, weight=1)
+        self._set_appearance_mode("dark")
         plt.axis('off')
 
         self.gui = gui.gui(master=self)
@@ -28,18 +29,15 @@ class App(customtkinter.CTk):
         except Exception as e:
             print(f"Error: {e}")
 
-    def start_vis(self, search):
-        if (not search.complete):
-            search.step()
-            self.gui.canvas.update_plot(search)
-            self.after(500, self.start_vis, search)
-        else:
-            print(search.index)
+    def start_vis(self, vis):
+        if (not vis.complete):
+            self.gui.canvas.update_plot(vis)
+            vis.step()
+            self.after(500, self.start_vis, vis)
     
     def button_click(self):
-        print("Visualisation Started")
-        search = searches.linear_search(time.time())
-        self.start_vis(search)
+        vis = searches.linear_search(time.time())
+        self.start_vis(vis)
     
     def button_callback(self):
         print("button pressed")
