@@ -1,8 +1,8 @@
 import customtkinter
-import tkinter as tk
 import seaborn as sns
 import matplotlib.pyplot as plt
 import gui
+import searches
 import time
 import threading
 
@@ -34,12 +34,17 @@ class App(customtkinter.CTk):
             print(f"Error: {e}")
     
 
-    def start_vis(self):
-        print("Sleep Over")
+    def start_vis(self, search):
+        if (not search.complete):
+            search.step()
+            self.after(500, self.start_vis, search)
+        else:
+            print(search.index)
     
     def button_click(self):
         print("Visualisation Started")
-        self.after(5000, self.start_vis)
+        search = searches.linear_search()
+        self.start_vis(search)
     
     def button_callback(self):
         print("button pressed")
