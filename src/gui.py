@@ -48,6 +48,7 @@ class canvasFrame(customtkinter.CTkFrame):
 
 
     def style_plot(self):
+        """Sets style for matplotlib plot"""
         self.plot.patch.set_facecolor('none')
         self.plot.spines['bottom'].set_color('white')
         self.plot.spines['top'].set_color('none') 
@@ -60,6 +61,10 @@ class canvasFrame(customtkinter.CTkFrame):
         self.plot.set_xticklabels([])
 
     def init_plot(self, search):
+        """Initialise plot for given algorithm
+        args:
+            search:
+                search object"""
         self.plot.clear()
         self.style_plot()
         self.plot.set_title(f"Target Value: {search.search_val}", color = "white")
@@ -74,8 +79,10 @@ class canvasFrame(customtkinter.CTkFrame):
         
         colours = ["skyblue"] * len(search.array)
         colours[search.array.index(search.search_val)] = "gold"
+
         if isinstance(search, searches.linear_search):
-            self.plot.set_xlabel(f"Current Index: {search.index} | Comparisons: {search.comparisons}", color = "white")
+            self.plot.set_xlabel(f"Current Index: {search.index} 
+                                 | Comparisons: {search.comparisons}", color = "white")
 
             if search.complete:
                 colours[search.index] = "green"
@@ -85,17 +92,17 @@ class canvasFrame(customtkinter.CTkFrame):
         elif isinstance(search, searches.binary_search):
 
             colours[search.index] = "red"
-            
             colours[search.lower_index] = "blue"
             colours[search.upper_index] = "blue"
-
-            self.plot.set_xlabel(f"Lower Index: {search.lower_index} | Upper Index: {search.upper_index} | Comparisons: {search.comparisons}", color = "white")
+            self.plot.set_xlabel(f"Lower Index: {search.lower_index} 
+                                 | Upper Index: {search.upper_index} 
+                                 | Comparisons: {search.comparisons}", color = "white")
         
         if search.complete:
                 colours = ["skyblue"] * len(search.array)
                 colours[search.index] = "green"
 
-        for i, bar in enumerate(self.plot.patches):
+        for i, bar in enumerate(self.plot.patches): # set bar colours
                 bar.set_color(colours[i])
         self.canvas.draw_idle()
 
@@ -111,7 +118,8 @@ class descriptionFrame(customtkinter.CTkFrame):
         self.grid(row=1, column=1, padx=(5,20), pady=(5,20), sticky= "nsew")
 
         # init description frame, text and button
-        self.title_label = customtkinter.CTkLabel(self, text=master.navbar.segmented_button.get())
+        self.title_label = customtkinter.CTkLabel(self, 
+            text=master.navbar.segmented_button.get())
         self.title_label.grid(row=0, column=0, padx=5, pady=5, sticky="nesw")
         self.desc_text = customtkinter.CTkTextbox(self, wrap="word")
         self.desc_text.grid(row=1, column=0, padx=5, pady=5, sticky="nesw")
@@ -129,14 +137,20 @@ class descriptionFrame(customtkinter.CTkFrame):
             self.startVisButton.configure(state="normal")
     
     def update_text(self):
-        """Updates description text to current algorithm"""
+        """Updates title & description text to current algorithm"""
+
+        # set title text
         self.title_label.configure(text = self.master.navbar.segmented_button.get())
+        
+        # set description text
         self.desc_text.configure(state="normal")
         self.desc_text.delete(0.0, customtkinter.END)
         if self.master.navbar.segmented_button.get() == "Linear Search":
-            text = self.master.master.load_text_from_file("../resources/linear_search_desc.txt")
+            text = self.master.master.load_text_from_file(
+                "../resources/linear_search_desc.txt")
         elif self.master.navbar.segmented_button.get() == "Binary Search":
-            text = self.master.master.load_text_from_file("../resources/binary_search_desc.txt")
+            text = self.master.master.load_text_from_file(
+                "../resources/binary_search_desc.txt")
         self.desc_text.insert(0.0, text)
         self.desc_text.configure(state="disabled")
 
@@ -151,4 +165,3 @@ class gui(customtkinter.CTkFrame):
         self.navbar = navbarFrame(master=self)
         self.canvas = canvasFrame(master=self)
         self.description = descriptionFrame(master=self)
-        # self.navbar.grid(row=0, column=0, columnspan=2, padx=20, pady=(20, 0), sticky="ew")

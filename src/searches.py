@@ -13,6 +13,7 @@ class searchAlgorithm():
             self.search_val = random.choice(self.array)
 
 class linear_search(searchAlgorithm):
+    """Standard linear search algorithm"""
     def __init__(self, seed):
         super().__init__(seed)
         random.shuffle(self.array)
@@ -22,8 +23,10 @@ class linear_search(searchAlgorithm):
         if self.array[self.index] == self.search_val:
             self.complete = True
         else:
-            self.index += 1        
+            self.index += 1
+
 class binary_search(searchAlgorithm):
+    """Standard binary search algorithm"""
     def __init__(self, seed):
         super().__init__(seed)
         self.lower_index = 0

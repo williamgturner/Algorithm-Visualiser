@@ -14,6 +14,7 @@ class App(customtkinter.CTk):
         self.grid_rowconfigure(0, weight=1)
         customtkinter.set_appearance_mode("dark")
 
+        # init first vis
         self.gui = gui.gui(master=self)
         self.vis = searches.linear_search(time.time())
         self.gui.canvas.init_plot(self.vis)
@@ -43,28 +44,32 @@ class App(customtkinter.CTk):
         if (not vis.complete):
             vis.step()
 
+            # different speeds for different vis
             if type(self.vis) == searches.linear_search:
                 delay = 100
             else:
                 delay = 1500
             # run in background so GUI remains responsive
             self.after(delay, self.start_vis, vis)
-        else:
+        else: # enable button once finished
             self.gui.description.toggle_button_enable()
     
     def vis_button_click(self):
-        if self.vis.complete:
+        if self.vis.complete: # Only create new vis if previous is complete
             self.vis = type(self.vis)(time.time())
+
         self.gui.canvas.init_plot(self.vis)
         self.gui.description.toggle_button_enable()
         self.start_vis(self.vis)
     
     def navbar_button_command(self, state):
+        self.vis.complete = True
         match state:
             case "Linear Search":
                 self.vis = searches.linear_search(time.time())
             case "Binary Search":
                 self.vis = searches.binary_search(time.time())
+        # init new vis
         self.gui.canvas.init_plot(self.vis)
         self.gui.description.update_text()
         self.gui.canvas.update_plot(self.vis)

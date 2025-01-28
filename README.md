@@ -18,7 +18,7 @@ pip3 install customtkinter
 
 ## Installing and Running
 ```
-cd /src
+cd ./src
 python3 main.py
 ```
 
