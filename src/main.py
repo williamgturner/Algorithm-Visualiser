@@ -36,6 +36,8 @@ class App(customtkinter.CTk):
                 delay = 100
             elif type(self.vis) == searches.BinarySearch:
                 delay = 1500
+            elif type(self.vis) == searches.BubbleSort:
+                delay = 1
             # run in background so GUI remains responsive
             self.after(delay, self.start_vis, vis)
         else: # enable button once finished
@@ -56,6 +58,8 @@ class App(customtkinter.CTk):
                 self.vis = searches.LinearSearch(time.time())
             case "Binary Search":
                 self.vis = searches.BinarySearch(time.time())
+            case "Bubble Sort":
+                self.vis = searches.BubbleSort(time.time())
         # init new vis
         self.gui.canvas.init_plot(self.vis)
         self.gui.description.update_text()

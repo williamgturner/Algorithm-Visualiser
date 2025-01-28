@@ -1,5 +1,5 @@
 import customtkinter
-import searches as searches
+import searches
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.ticker import MultipleLocator
@@ -65,7 +65,10 @@ class canvasFrame(customtkinter.CTkFrame):
                 search object"""
         self.plot.clear()
         self.style_plot()
-        self.plot.set_title(f"Target Value: {search.search_val}", color = "white")
+        if isinstance(search, searches.SearchAlgorithm):
+            self.plot.set_title(f"Target Value: {search.search_val}", color = "white")
+       # else:
+            #self.plot.set_title(f"Target Value: {search.search_val}", color = "white")
         colours = ["skyblue"] * len(search.array)
         self.plot.bar(range(len(search.array)), search.array, color= colours)
         self.plot.index_arrow = None
@@ -77,7 +80,9 @@ class canvasFrame(customtkinter.CTkFrame):
                 a search object that contains an array and index"""
         
         colours = ["skyblue"] * len(search.array)
-        colours[search.array.index(search.search_val)] = "gold"
+        if isinstance(search, searches.SearchAlgorithm):
+            colours[search.array.index(search.search_val)] = "gold"
+        
         if self.plot.index_arrow is not None:
             self.plot.index_arrow.remove()
 
@@ -96,17 +101,24 @@ class canvasFrame(customtkinter.CTkFrame):
             colours[search.index] = "red"
             colours[search.lower_index] = "blue"
             colours[search.upper_index] = "blue"
+
+            if search.complete:
+                colours = ["skyblue"] * len(search.array)
+                colours[search.index] = "green"
+
             self.plot.set_xlabel(
                 "Lower Index: " + str(search.lower_index) +
                 " | Upper Index: " + str(search.upper_index) +
                 " | Comparisons: " + str(search.comparisons), color="white")
+            
+        elif isinstance(search, searches.BubbleSort):
+            colours[search.index] = "red"
+            if search.complete:
+                colours = ["green"] * len(search.array)
         
-        if search.complete:
-                colours = ["skyblue"] * len(search.array)
-                colours[search.index] = "green"
-
         for i, bar in enumerate(self.plot.patches): # set bar colours
                 bar.set_color(colours[i])
+                bar.set_height(search.array[i])
                 if (i == search.index):
                     # annotate current index with red arrow
                     self.plot.index_arrow = self.plot.annotate('',
