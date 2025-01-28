@@ -10,13 +10,20 @@ An algorithm visualiser written in python; using CustomTKinter for graphics and 
  - Bubble Sort 🟥
  - Bogo Sort 🟥
 
-## Showcase
-![Working linear & binary search](images/demo.gif)
-
 ## Prerequisites
+AlgoVis uses CustomTKinter for the GUI
 ```
 pip3 install customtkinter
 ```
+
+## Installing and Running
+```
+cd /src
+python3 main.py
+```
+
+## Showcase
+![Working linear & binary search](images/demo.gif)
 
 ## Authors
  - William Turner
