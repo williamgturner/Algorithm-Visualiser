@@ -14,9 +14,9 @@ An algorithm visualiser written in python; using CustomTKinter for graphics and 
 ![Working linear & binary search](images/demo.gif)
 
 ## Prerequisites
-'''
+```
 pip3 install customtkinter
-'''
+```
 
 ## Authors
  - William Turner
