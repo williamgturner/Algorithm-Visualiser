@@ -1,6 +1,6 @@
 import customtkinter
-import gui
-import searches
+import gui as gui
+import searches as searches
 import time
 
 class App(customtkinter.CTk):

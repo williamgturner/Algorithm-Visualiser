@@ -1,7 +1,7 @@
 import customtkinter
 import tkinter as tk
 import matplotlib
-import searches
+import searches as searches
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.ticker import MultipleLocator
@@ -134,9 +134,9 @@ class descriptionFrame(customtkinter.CTkFrame):
         self.desc_text.configure(state="normal")
         self.desc_text.delete(0.0, customtkinter.END)
         if self.master.navbar.segmented_button.get() == "Linear Search":
-            text = self.master.master.load_text_from_file("./resources/linear_search_desc.txt")
+            text = self.master.master.load_text_from_file("../resources/linear_search_desc.txt")
         elif self.master.navbar.segmented_button.get() == "Binary Search":
-            text = self.master.master.load_text_from_file("./resources/binary_search_desc.txt")
+            text = self.master.master.load_text_from_file("../resources/binary_search_desc.txt")
         self.desc_text.insert(0.0, text)
         self.desc_text.configure(state="disabled")
 
