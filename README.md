@@ -12,3 +12,14 @@ An algorithm visualiser written in python; using CustomTKinter for graphics and 
 
 ## Showcase
 ![Working linear & binary search](images/demo.gif)
+
+## Prerequisites
+'''
+pip3 install customtkinter
+'''
+
+## Authors
+ - William Turner
+
+## License
+This project is licensed under the MIT license - see the [LICENSE.md](LICENSE) file for details.
