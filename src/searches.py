@@ -2,7 +2,7 @@ import random
 
 class Algorithm():
     def __init__(self, seed):
-        self.index= 0
+        self.inde = 0
         self.array = list(range(1, 51))
         self.comparisons = 0
         self.complete = False
@@ -19,8 +19,6 @@ class SortAlgorithm(Algorithm):
     def __init__(self, seed):
         super().__init__(seed)
         random.shuffle(self.array)
-        self.index_1 = 0
-        self.index_2 = 1
 
 class LinearSearch(SearchAlgorithm):
     """Standard linear search algorithm"""

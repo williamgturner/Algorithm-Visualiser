@@ -174,6 +174,9 @@ class descriptionFrame(customtkinter.CTkFrame):
         elif self.master.navbar.segmented_button.get() == "Binary Search":
             text = load_text_from_file(
                 "../resources/binary_search_desc.txt")
+        elif self.master.navbar.segmented_button.get() == "Bubble Sort":
+            text = load_text_from_file(
+                "../resources/bubble_sort_desc.txt")
         self.desc_text.insert(0.0, text)
         self.desc_text.configure(state="disabled")
 
