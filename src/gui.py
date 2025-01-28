@@ -81,8 +81,8 @@ class canvasFrame(customtkinter.CTkFrame):
         colours[search.array.index(search.search_val)] = "gold"
 
         if isinstance(search, searches.linear_search):
-            self.plot.set_xlabel(f"Current Index: {search.index} 
-                                 | Comparisons: {search.comparisons}", color = "white")
+            self.plot.set_xlabel(f"Current Index: {search.index} \
+             | Comparisons: {search.comparisons}", color = "white")
 
             if search.complete:
                 colours[search.index] = "green"
@@ -94,8 +94,8 @@ class canvasFrame(customtkinter.CTkFrame):
             colours[search.index] = "red"
             colours[search.lower_index] = "blue"
             colours[search.upper_index] = "blue"
-            self.plot.set_xlabel(f"Lower Index: {search.lower_index} 
-                                 | Upper Index: {search.upper_index} 
+            self.plot.set_xlabel(f"Lower Index: {search.lower_index} \
+                                 | Upper Index: {search.upper_index} \
                                  | Comparisons: {search.comparisons}", color = "white")
         
         if search.complete:
@@ -146,10 +146,10 @@ class descriptionFrame(customtkinter.CTkFrame):
         self.desc_text.configure(state="normal")
         self.desc_text.delete(0.0, customtkinter.END)
         if self.master.navbar.segmented_button.get() == "Linear Search":
-            text = self.master.master.load_text_from_file(
+            text = load_text_from_file(
                 "../resources/linear_search_desc.txt")
         elif self.master.navbar.segmented_button.get() == "Binary Search":
-            text = self.master.master.load_text_from_file(
+            text = load_text_from_file(
                 "../resources/binary_search_desc.txt")
         self.desc_text.insert(0.0, text)
         self.desc_text.configure(state="disabled")
@@ -165,3 +165,16 @@ class gui(customtkinter.CTkFrame):
         self.navbar = navbarFrame(master=self)
         self.canvas = canvasFrame(master=self)
         self.description = descriptionFrame(master=self)
+
+def load_text_from_file(file_path):
+        """Loads and returns text string from given file
+        args:
+            file_path:
+                string file path to retrieve text from"""
+        try:
+            with open(file_path, 'r') as file:
+                file_content = file.read()
+            
+            return file_content
+        except Exception as e:
+            print(f"Error: {e}")

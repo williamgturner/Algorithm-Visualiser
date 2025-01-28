@@ -11,13 +11,14 @@ An algorithm visualiser written in python; using CustomTKinter for graphics and 
  - Bogo Sort 🟥
 
 ## Prerequisites
-AlgoVis uses CustomTKinter for the GUI
+ - CustomTKinter
 ```
 pip3 install customtkinter
 ```
 
 ## Installing and Running
 ```
+git clone https://github.com/williamgturner/AlgoVis
 cd ./src
 python3 main.py
 ```

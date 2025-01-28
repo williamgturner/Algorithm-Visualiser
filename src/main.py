@@ -21,19 +21,6 @@ class App(customtkinter.CTk):
         self.gui.description.update_text()
         self.focus_force() # bring window into focus on app open
 
-    def load_text_from_file(self, file_path):
-        """Loads and returns text string from given file
-        args:
-            file_path:
-                string file path to retrieve text from"""
-        try:
-            with open(file_path, 'r') as file:
-                file_content = file.read()
-            
-            return file_content
-        except Exception as e:
-            print(f"Error: {e}")
-
     def start_vis(self, vis):
         """Recursive function to step through given visualisation
         and update GUI.
