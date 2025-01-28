@@ -1,4 +1,3 @@
-
 import random
 
 class Algorithm():
@@ -22,7 +21,6 @@ class SortAlgorithm():
         random.shuffle(self.array)
         self.index_1
         self.index_2
-
 
 class LinearSearch(SearchAlgorithm):
     """Standard linear search algorithm"""

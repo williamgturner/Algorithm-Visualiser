@@ -1,10 +1,9 @@
 import customtkinter
-import tkinter as tk
-import matplotlib
 import searches as searches
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.ticker import MultipleLocator
+
 class navbarFrame(customtkinter.CTkFrame):
     """Frame that holds buttons to select algorithm"""
     def __init__(self, master):
@@ -46,7 +45,6 @@ class canvasFrame(customtkinter.CTkFrame):
             padx=5, pady=5, sticky="nesw")
         self.canvas.get_tk_widget().config(bg=self['bg'])
 
-
     def style_plot(self):
         """Sets style for matplotlib plot"""
         self.plot.patch.set_facecolor('none')
@@ -70,6 +68,7 @@ class canvasFrame(customtkinter.CTkFrame):
         self.plot.set_title(f"Target Value: {search.search_val}", color = "white")
         colours = ["skyblue"] * len(search.array)
         self.plot.bar(range(len(search.array)), search.array, color= colours)
+        self.plot.index_arrow = None
     
     def update_plot(self, search):
         """Update plot graphics.
@@ -79,6 +78,8 @@ class canvasFrame(customtkinter.CTkFrame):
         
         colours = ["skyblue"] * len(search.array)
         colours[search.array.index(search.search_val)] = "gold"
+        if self.plot.index_arrow is not None:
+            self.plot.index_arrow.remove()
 
         if isinstance(search, searches.LinearSearch):
             self.plot.set_xlabel(
@@ -106,6 +107,13 @@ class canvasFrame(customtkinter.CTkFrame):
 
         for i, bar in enumerate(self.plot.patches): # set bar colours
                 bar.set_color(colours[i])
+                if (i == search.index):
+                    # annotate current index with red arrow
+                    self.plot.index_arrow = self.plot.annotate('',
+                        xy=(bar.get_x() + bar.get_width() / 2, bar.get_height()),
+                        xytext=(bar.get_x() + bar.get_width() / 2, bar.get_height() + 5),
+                        arrowprops=dict(facecolor='red', shrink=0.05)
+                    )
         self.canvas.draw_idle()
 
 class descriptionFrame(customtkinter.CTkFrame):
@@ -156,7 +164,6 @@ class descriptionFrame(customtkinter.CTkFrame):
                 "../resources/binary_search_desc.txt")
         self.desc_text.insert(0.0, text)
         self.desc_text.configure(state="disabled")
-
 
 class gui(customtkinter.CTkFrame):
     """Frame that contains all GUI elements"""
