@@ -38,24 +38,23 @@ class App(customtkinter.CTk):
         and update GUI.
         args:
             vis:
-                vis object that contains a step() function and complete flag
-
-        """
+                vis object that contains a step() function and complete flag"""
         self.gui.canvas.update_plot(vis)
         if (not vis.complete):
             vis.step()
-            # run in background so GUI remains responsive
+
             if type(self.vis) == searches.linear_search:
                 delay = 100
             else:
                 delay = 1500
-
+            # run in background so GUI remains responsive
             self.after(delay, self.start_vis, vis)
         else:
             self.gui.description.toggle_button_enable()
     
     def vis_button_click(self):
-        self.vis = type(self.vis)(time.time())
+        if self.vis.complete:
+            self.vis = type(self.vis)(time.time())
         self.gui.canvas.init_plot(self.vis)
         self.gui.description.toggle_button_enable()
         self.start_vis(self.vis)

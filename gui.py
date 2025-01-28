@@ -75,21 +75,26 @@ class canvasFrame(customtkinter.CTkFrame):
         colours = ["skyblue"] * len(search.array)
         colours[search.array.index(search.search_val)] = "gold"
         if isinstance(search, searches.linear_search):
-            self.plot.set_xlabel(f"Current Index: {search.index} | Comparisons: {search.iterations}", color = "white")
+            self.plot.set_xlabel(f"Current Index: {search.index} | Comparisons: {search.comparisons}", color = "white")
+
+            if search.complete:
+                colours[search.index] = "green"
+            else:
+                colours[search.index] = "red"
 
         elif isinstance(search, searches.binary_search):
 
+            colours[search.index] = "red"
+            
             colours[search.lower_index] = "blue"
             colours[search.upper_index] = "blue"
 
-            colours[search.index] = "red"
-            self.plot.set_xlabel(f"Lower Index: {search.lower_index} | Upper Index: {search.upper_index} | Comparisons: {search.iterations}", color = "white")
+            self.plot.set_xlabel(f"Lower Index: {search.lower_index} | Upper Index: {search.upper_index} | Comparisons: {search.comparisons}", color = "white")
         
         if search.complete:
+                colours = ["skyblue"] * len(search.array)
                 colours[search.index] = "green"
-        else:
-            colours[search.index] = "red"
-        
+
         for i, bar in enumerate(self.plot.patches):
                 bar.set_color(colours[i])
         self.canvas.draw_idle()
