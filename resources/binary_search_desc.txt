@@ -1,0 +1,16 @@
+Binary Search is an efficient algorithm used to find a target value in a sorted array or list. It works by repeatedly dividing the search interval in half. The algorithm compares the target with the middle element of the array:
+
+If the target is equal to the middle element, the search is complete.
+If the target is smaller, the search continues in the left half.
+If the target is larger, the search continues in the right half.
+This process repeats, halving the search space each time, until the target is found or the search space is empty.
+
+Characteristics:
+
+- Efficient: Fast compared to Linear Search, with a time complexity of O(log n), where n is the number of elements.
+
+- Sorted data: Requires the array to be sorted before applying the algorithm.
+
+- Reduces search space: Each comparison eliminates half of the remaining search space, making it much faster for large datasets.
+
+Binary Search is ideal for large sorted datasets, providing a significant performance advantage over algorithms like Linear Search.

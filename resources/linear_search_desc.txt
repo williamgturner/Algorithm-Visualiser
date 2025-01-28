@@ -1,0 +1,11 @@
+Linear Search is a simple algorithm used to find a target value in an array or list by checking each element one by one. It starts from the first element and compares it with the target. If a match is found, the index is returned; if not, the algorithm moves to the next element. The process continues until the target is found or all elements have been checked.
+
+Characteristics:
+
+- Simple and easy to implement.
+
+- Unsorted data: Works even if the array is not sorted.
+
+- Time Complexity: O(n) in the worst case, where n is the number of elements.
+
+Linear Search is efficient for small or unsorted datasets but becomes slow for large arrays compared to more advanced algorithms like Binary Search.

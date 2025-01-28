@@ -110,9 +110,7 @@ class descriptionFrame(customtkinter.CTkFrame):
         self.title_label.grid(row=0, column=0, padx=5, pady=5, sticky="nesw")
         self.desc_text = customtkinter.CTkTextbox(self, wrap="word")
         self.desc_text.grid(row=1, column=0, padx=5, pady=5, sticky="nesw")
-        text = master.master.load_text_from_file("./resources/lorem_ipsum.txt")
         self.desc_text.delete(1.0, customtkinter.END)
-        self.desc_text.insert(0.0, text)
         self.desc_text.configure(state="disabled")
         self.startVisButton = customtkinter.CTkButton(self,
             text="Start Visualisation", command=master.master.vis_button_click)
@@ -128,6 +126,14 @@ class descriptionFrame(customtkinter.CTkFrame):
     def update_text(self):
         """Updates description text to current algorithm"""
         self.title_label.configure(text = self.master.navbar.segmented_button.get())
+        self.desc_text.configure(state="normal")
+        self.desc_text.delete(0.0, customtkinter.END)
+        if self.master.navbar.segmented_button.get() == "Linear Search":
+            text = self.master.master.load_text_from_file("./resources/linear_search_desc.txt")
+        elif self.master.navbar.segmented_button.get() == "Binary Search":
+            text = self.master.master.load_text_from_file("./resources/binary_search_desc.txt")
+        self.desc_text.insert(0.0, text)
+        self.desc_text.configure(state="disabled")
 
 
 class gui(customtkinter.CTkFrame):

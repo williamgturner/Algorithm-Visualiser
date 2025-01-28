@@ -17,6 +17,7 @@ class App(customtkinter.CTk):
         self.gui = gui.gui(master=self)
         self.vis = searches.linear_search(time.time())
         self.gui.canvas.init_plot(self.vis)
+        self.gui.description.update_text()
         self.focus_force() # bring window into focus on app open
 
     def load_text_from_file(self, file_path):
