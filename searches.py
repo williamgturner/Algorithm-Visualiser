@@ -6,7 +6,6 @@ class searchAlgorithm():
         self.index= 0
         self.array = list(range(1, 51))
         self.comparisons = 0
-        self.complete = False
         random.seed(seed)
         self.search_val = 1
         while ((self.search_val == 1) or (self.search_val == 50)):
@@ -21,10 +20,8 @@ class linear_search(searchAlgorithm):
         self.comparisons += 1
         if self.array[self.index] == self.search_val:
             self.complete = True
-            return self.complete
         else:
             self.index += 1
-            return self.complete
         
 class binary_search(searchAlgorithm):
     def __init__(self, seed):
@@ -37,7 +34,6 @@ class binary_search(searchAlgorithm):
         self.comparisons += 1
         if self.array[self.index] == self.search_val:
             self.complete = True
-            return self.complete
         else:
             if self.search_val <= self.array[self.index]:
                 self.upper_index = self.index - 1
@@ -45,4 +41,3 @@ class binary_search(searchAlgorithm):
                 self.lower_index = self.index + 1
             self.comparisons += 1
             self.index = self.lower_index + (self.upper_index - self.lower_index) // 2
-            return self.complete
