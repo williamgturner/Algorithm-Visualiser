@@ -16,7 +16,7 @@ class App(customtkinter.CTk):
 
         # init first vis
         self.gui = gui.gui(master=self)
-        self.vis = searches.linear_search(time.time())
+        self.vis = searches.LinearSearch(time.time())
         self.gui.canvas.init_plot(self.vis)
         self.gui.description.update_text()
         self.focus_force() # bring window into focus on app open
@@ -32,9 +32,9 @@ class App(customtkinter.CTk):
             vis.step()
 
             # different speeds for different vis
-            if type(self.vis) == searches.linear_search:
+            if type(self.vis) == searches.LinearSearch:
                 delay = 100
-            else:
+            elif type(self.vis) == searches.BinarySearch:
                 delay = 1500
             # run in background so GUI remains responsive
             self.after(delay, self.start_vis, vis)
@@ -53,9 +53,9 @@ class App(customtkinter.CTk):
         self.vis.complete = True
         match state:
             case "Linear Search":
-                self.vis = searches.linear_search(time.time())
+                self.vis = searches.LinearSearch(time.time())
             case "Binary Search":
-                self.vis = searches.binary_search(time.time())
+                self.vis = searches.BinarySearch(time.time())
         # init new vis
         self.gui.canvas.init_plot(self.vis)
         self.gui.description.update_text()

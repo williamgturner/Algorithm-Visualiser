@@ -1,18 +1,30 @@
 
 import random
 
-class searchAlgorithm():
+class Algorithm():
     def __init__(self, seed):
         self.index= 0
         self.array = list(range(1, 51))
         self.comparisons = 0
         self.complete = False
         random.seed(seed)
+
+class SearchAlgorithm(Algorithm):
+    def __init__(self, seed):
+        super().__init__(seed)
         self.search_val = 1
         while ((self.search_val == 1) or (self.search_val == 50)):
             self.search_val = random.choice(self.array)
 
-class linear_search(searchAlgorithm):
+class SortAlgorithm():
+    def __init__(self, seed):
+        super().__init__(seed)
+        random.shuffle(self.array)
+        self.index_1
+        self.index_2
+
+
+class LinearSearch(SearchAlgorithm):
     """Standard linear search algorithm"""
     def __init__(self, seed):
         super().__init__(seed)
@@ -25,7 +37,7 @@ class linear_search(searchAlgorithm):
         else:
             self.index += 1
 
-class binary_search(searchAlgorithm):
+class BinarySearch(SearchAlgorithm):
     """Standard binary search algorithm"""
     def __init__(self, seed):
         super().__init__(seed)

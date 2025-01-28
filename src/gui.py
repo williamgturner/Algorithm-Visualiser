@@ -10,8 +10,10 @@ class navbarFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
 
+        # set pos
         self.grid_columnconfigure(0, weight=1)
         self.grid(row=0, column=0, padx=20,pady=(20,0),columnspan=2,sticky="ew")
+
         # init navbar and nav buttons
         algos = ["Linear Search", "Binary Search", "Quick Sort",
             "Insertion Sort", "Bubble Sort", "Selection Sort", "Bogo Sort"]
@@ -26,16 +28,14 @@ class canvasFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
 
+        # set pos and configure size
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
         self.grid(row=1, column=0, padx=(20, 0), pady=(5,20), sticky= "nesw")
-
         canvas_height = self.winfo_height()
         canvas_width = self.winfo_width()
-
         figure = Figure(figsize=(canvas_width, canvas_height))
         figure.patch.set_facecolor('none')
-
         self.plot = figure.add_subplot(1, 1, 1)
 
         # set plot aesthetics
@@ -80,23 +80,25 @@ class canvasFrame(customtkinter.CTkFrame):
         colours = ["skyblue"] * len(search.array)
         colours[search.array.index(search.search_val)] = "gold"
 
-        if isinstance(search, searches.linear_search):
-            self.plot.set_xlabel(f"Current Index: {search.index} \
-             | Comparisons: {search.comparisons}", color = "white")
+        if isinstance(search, searches.LinearSearch):
+            self.plot.set_xlabel(
+                "Current Index: " + str(search.index) +
+                " | Comparisons: " + str(search.comparisons), color="white")
 
             if search.complete:
                 colours[search.index] = "green"
             else:
                 colours[search.index] = "red"
 
-        elif isinstance(search, searches.binary_search):
+        elif isinstance(search, searches.BinarySearch):
 
             colours[search.index] = "red"
             colours[search.lower_index] = "blue"
             colours[search.upper_index] = "blue"
-            self.plot.set_xlabel(f"Lower Index: {search.lower_index} \
-                                 | Upper Index: {search.upper_index} \
-                                 | Comparisons: {search.comparisons}", color = "white")
+            self.plot.set_xlabel(
+                "Lower Index: " + str(search.lower_index) +
+                " | Upper Index: " + str(search.upper_index) +
+                " | Comparisons: " + str(search.comparisons), color="white")
         
         if search.complete:
                 colours = ["skyblue"] * len(search.array)
@@ -110,6 +112,7 @@ class descriptionFrame(customtkinter.CTkFrame):
     """Frame that holds the description text for given algorithm"""
     def __init__(self, master):
         super().__init__(master)
+
         # set pos
         self.grid_rowconfigure(0, weight=0)
         self.grid_rowconfigure(1, weight=1)
