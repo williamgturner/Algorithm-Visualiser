@@ -62,4 +62,5 @@ class App(customtkinter.CTk):
         self.gui.canvas.update_plot(self.vis)
 
 app = App()
+app.minsize(700, 525)
 app.mainloop()
