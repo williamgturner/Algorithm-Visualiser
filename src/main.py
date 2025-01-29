@@ -1,6 +1,6 @@
 import customtkinter
 import gui as gui
-import searches as searches
+import algorithms as algorithms
 import time
 
 class App(customtkinter.CTk):
@@ -16,7 +16,7 @@ class App(customtkinter.CTk):
 
         # init first vis
         self.gui = gui.gui(master=self)
-        self.vis = searches.LinearSearch(time.time())
+        self.vis = algorithms.LinearSearch(time.time())
         self.gui.canvas.init_plot(self.vis)
         self.gui.description.update_text()
         self.focus_force() # bring window into focus on app open
@@ -32,12 +32,14 @@ class App(customtkinter.CTk):
             vis.step()
 
             # different speeds for different vis
-            if type(self.vis) == searches.LinearSearch:
-                delay = 100
-            elif type(self.vis) == searches.BinarySearch:
+            if type(self.vis) == algorithms.LinearSearch:
+                delay = 120
+            elif type(self.vis) == algorithms.BinarySearch:
                 delay = 1500
-            elif type(self.vis) == searches.BubbleSort:
+            elif type(self.vis) == algorithms.BubbleSort:
                 delay = 1
+            elif type(self.vis) == algorithms.InsertionSort:
+                delay = 500
             # run in background so GUI remains responsive
             self.after(delay, self.start_vis, vis)
         else: # enable button once finished
@@ -55,11 +57,13 @@ class App(customtkinter.CTk):
         self.vis.complete = True
         match state:
             case "Linear Search":
-                self.vis = searches.LinearSearch(time.time())
+                self.vis = algorithms.LinearSearch(time.time())
             case "Binary Search":
-                self.vis = searches.BinarySearch(time.time())
+                self.vis = algorithms.BinarySearch(time.time())
             case "Bubble Sort":
-                self.vis = searches.BubbleSort(time.time())
+                self.vis = algorithms.BubbleSort(time.time())
+            case "Insertion Sort":
+                self.vis = algorithms.InsertionSort(time.time())
         # init new vis
         self.gui.canvas.init_plot(self.vis)
         self.gui.description.update_text()

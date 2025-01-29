@@ -6,8 +6,8 @@ An algorithm visualiser written in python; using CustomTKinter for graphics and 
  - Linear Search 🟩
  - Binary Search 🟩
  - Quick Sort 🟥
- - Insertion Sort 🟥
- - Bubble Sort 🟥
+ - Insertion Sort 🟩
+ - Bubble Sort 🟩
  - Bogo Sort 🟥
 
 ## Prerequisites
