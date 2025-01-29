@@ -126,6 +126,8 @@ class canvasFrame(customtkinter.CTkFrame):
                 colours = ["green"] * len(search.array)
         
         elif isinstance(search, algorithms.InsertionSort):
+            for i in range(search.index):
+                colours[i] = "green"
             if search.position < 0:
                 colours[0] = "red"
             else:
