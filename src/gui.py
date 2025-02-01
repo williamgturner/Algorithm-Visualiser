@@ -22,6 +22,14 @@ class navbarFrame(customtkinter.CTkFrame):
         self.segmented_button.grid(row=0, column=0, padx=5,
             pady=5, columnspan=2, sticky = "ew")
         self.segmented_button.set("Linear Search")
+    
+    def toggle_navbar_enable(self):
+        """Toggles navbar buttons disabled state."""
+        if self.segmented_button._state == "normal":
+            self.segmented_button.configure(state = "disabled")
+        else:
+            self.segmented_button.configure(state = "normal")
+
 
 class canvasFrame(customtkinter.CTkFrame):
     """Frame that holds the matplotlib figure"""

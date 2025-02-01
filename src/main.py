@@ -44,6 +44,7 @@ class App(customtkinter.CTk):
             self.after(delay, self.start_vis, vis)
         else: # enable button once finished
             self.gui.description.toggle_button_enable()
+            self.gui.navbar.toggle_navbar_enable()
     
     def vis_button_click(self):
         if self.vis.complete: # Only create new vis if previous is complete
@@ -51,6 +52,7 @@ class App(customtkinter.CTk):
 
         self.gui.canvas.init_plot(self.vis)
         self.gui.description.toggle_button_enable()
+        self.gui.navbar.toggle_navbar_enable()
         self.start_vis(self.vis)
     
     def navbar_button_command(self, state):

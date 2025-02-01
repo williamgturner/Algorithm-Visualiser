@@ -8,7 +8,7 @@ An algorithm visualiser written in python; using CustomTKinter for graphics and 
  - Quick Sort 🟥
  - Insertion Sort 🟩
  - Bubble Sort 🟩
- - Bogo Sort 🟥
+ - Selection Sort 🟥
 
 ## Prerequisites
  - CustomTKinter
