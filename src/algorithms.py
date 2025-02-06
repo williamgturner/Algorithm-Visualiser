@@ -22,7 +22,9 @@ class LinearSearch(SearchAlgorithm):
     """Standard linear search algorithm"""
     def __init__(self, seed):
         super().__init__(seed)
+
         random.shuffle(self.array)
+        # if search val is at start of array it can be confusing
         while (self.array.index(self.search_val) <= 5):
             self.search_val = random.choice(self.array)
     

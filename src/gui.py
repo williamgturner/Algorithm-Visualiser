@@ -94,13 +94,15 @@ class canvasFrame(customtkinter.CTkFrame):
         if isinstance(search, algorithms.SearchAlgorithm):
             colours[search.array.index(search.search_val)] = "gold"
         
+        # remove all arrows
         try:
             self.plot.index_arrow.remove()
         except AttributeError:
             pass
         except ValueError:
             pass
-
+        
+        # linear search styling
         if isinstance(search, algorithms.LinearSearch):
             self.plot.set_xlabel(
                 "Current Index: " + str(search.index) +
@@ -111,6 +113,7 @@ class canvasFrame(customtkinter.CTkFrame):
             else:
                 colours[search.index] = "red"
 
+        # binary search styling
         elif isinstance(search, algorithms.BinarySearch):
 
             colours[search.index] = "red"
@@ -125,14 +128,14 @@ class canvasFrame(customtkinter.CTkFrame):
                 "Lower Index: " + str(search.lower_index) +
                 " | Upper Index: " + str(search.upper_index) +
                 " | Comparisons: " + str(search.comparisons), color="white")
-            
+        # bubble sort styling
         elif isinstance(search, algorithms.BubbleSort):
             colours[search.index] = "red"
             self.plot.set_xlabel(
                 "Comparisons: " + str(search.comparisons), color="white")
             if search.complete:
                 colours = ["green"] * len(search.array)
-        
+        #insertion sort styling
         elif isinstance(search, algorithms.InsertionSort):
             for i in range(search.index):
                 colours[i] = "green"
@@ -144,7 +147,7 @@ class canvasFrame(customtkinter.CTkFrame):
                 "Comparisons: " + str(search.comparisons), color="white")
             if search.complete:
                 colours = ["green"] * len(search.array)
-
+        # selection sort styling
         elif isinstance(search, algorithms.SelectionSort):
             for i in range(search.index):
                 colours[i] = "green"
@@ -152,12 +155,11 @@ class canvasFrame(customtkinter.CTkFrame):
             self.plot.set_xlabel(
                 "Comparisons: " + str(search.comparisons), color="white")
 
-        
-        for i, bar in enumerate(self.plot.patches): # set bar colours
+        # set bar colours and arrow annotation
+        for i, bar in enumerate(self.plot.patches):
                 bar.set_color(colours[i])
                 bar.set_height(search.array[i])
-                if (i == search.index):
-                    # annotate current index with red arrow
+                if (i == search.index):                  # annotate current index with red arrow
                     self.plot.index_arrow = self.plot.annotate('',
                         xy=(bar.get_x() + bar.get_width() / 2, bar.get_height()),
                         xytext=(bar.get_x() + bar.get_width() / 2, bar.get_height() + 5),
