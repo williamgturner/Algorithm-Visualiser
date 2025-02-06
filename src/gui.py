@@ -144,6 +144,14 @@ class canvasFrame(customtkinter.CTkFrame):
                 "Comparisons: " + str(search.comparisons), color="white")
             if search.complete:
                 colours = ["green"] * len(search.array)
+
+        elif isinstance(search, algorithms.SelectionSort):
+            for i in range(search.index):
+                colours[i] = "green"
+            colours[search.index] = "red"
+            self.plot.set_xlabel(
+                "Comparisons: " + str(search.comparisons), color="white")
+
         
         for i, bar in enumerate(self.plot.patches): # set bar colours
                 bar.set_color(colours[i])
@@ -209,6 +217,9 @@ class descriptionFrame(customtkinter.CTkFrame):
         elif self.master.navbar.segmented_button.get() == "Insertion Sort":
             text = load_text_from_file(
                 "../resources/insertion_sort_desc.txt")
+        elif self.master.navbar.segmented_button.get() == "Selection Sort":
+            text = load_text_from_file(
+                "../resources/selection_sort_desc.txt")
         self.desc_text.insert(0.0, text)
         self.desc_text.configure(state="disabled")
 

@@ -1,0 +1,11 @@
+Selection Sort is a straightforward sorting algorithm that repeatedly selects the smallest (or largest, depending on implementation) element from the unsorted portion of the array and swaps it with the first unsorted element. It begins by looking at the entire array and selecting the smallest element, then moves the boundary of the unsorted portion forward, effectively "sorting" one element at a time. The process continues until the array is fully sorted.
+
+Characteristics:
+
+- Simple to implement and understand.
+
+- In-place sorting: Does not require additional memory for sorting the array.
+
+- Time Complexity: O(n²) in the worst and average case, where n is the number of elements.
+
+Selection Sort is efficient for small datasets but becomes inefficient for larger arrays due to its quadratic time complexity, making it less practical than algorithms like QuickSort or MergeSort for larger data sets.

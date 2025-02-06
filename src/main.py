@@ -40,6 +40,8 @@ class App(customtkinter.CTk):
                 delay = 1
             elif type(self.vis) == algorithms.InsertionSort:
                 delay = 500
+            elif type(self.vis) == algorithms.SelectionSort:
+                delay = 500
             # run in background so GUI remains responsive
             self.after(delay, self.start_vis, vis)
         else: # enable button once finished
@@ -66,6 +68,8 @@ class App(customtkinter.CTk):
                 self.vis = algorithms.BubbleSort(time.time())
             case "Insertion Sort":
                 self.vis = algorithms.InsertionSort(time.time())
+            case "Selection Sort":
+                self.vis = algorithms.SelectionSort(time.time())
         # init new vis
         self.gui.canvas.init_plot(self.vis)
         self.gui.description.update_text()

@@ -103,3 +103,25 @@ class InsertionSort(SortAlgorithm):
             self.index += 1
         else:
             self.complete = True
+
+class SelectionSort(SortAlgorithm):
+    """Standard selection sort algorithm"""
+    def __init__(self, seed):
+        super().__init__(seed)
+        self.index = 0
+
+    def step(self):
+        if self.index < len(self.array) - 1:
+            self.comparisons += 1
+            index = self.index
+
+            for i in range(self.index + 1, len(self.array)):
+                self.comparisons += 1
+                if self.array[i] < self.array[index]:
+                    index = i
+            if index != self.index:
+                self.array[self.index], self.array[index] = self.array[index], self.array[self.index]
+
+            self.index += 1
+        else:
+            self.complete = True
