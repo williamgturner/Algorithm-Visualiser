@@ -1,4 +1,4 @@
-# AlgoVis
+# Algorithm Visualiser
 An algorithm visualiser written in python; using CustomTKinter for graphics and matplotlib for graphs.
 
 ## Algorithms
