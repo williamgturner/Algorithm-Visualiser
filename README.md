@@ -1,5 +1,5 @@
 # Algorithm Visualiser
-An algorithm visualiser written in python; using CustomTKinter for graphics and matplotlib for graphs.
+An algorithm visualiser written in python. Uses CustomTKinter for graphics, and matplotlib for graphs.
 
 ## Algorithms
 🟩 - Implemented | 🟥 - Not yet implented
